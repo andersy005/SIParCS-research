@@ -1,2 +1,2 @@
-# research-paper-notes
-Notes and Summaries on ML - DL -  CV-related Research Papers (with optional implementations)
+# SIParCS-research
+Notes and Summaries on different topics during my summer research internship at [NCAR]()
