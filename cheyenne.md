@@ -33,3 +33,26 @@ Cheyenne is a **5.34-petaflops**, high-performance computer built for NCAR.
 - **> 3.5 times Yellowstone peak  performance**  
   - 5.34 peak petaflops (vs. 1.504) 
 
+## Data Analysis and Visualization 
+- Geyser
+ - 16 Quad-socket nodes
+ - 10-core westermer
+ - 1 TB Memory
+
+- Caldera
+
+
+## File Storage 
+
+- Glade Parallel spinning disk storage
+ - Uses IBM GPFS/Spectrum Scale Technology
+ - Optimized for parallel I/O operations
+ - Simulation and analysis I/O occurs here
+
+- HPSS tape archive
+ - POSIX-like interface for long term aarchival and data backups
+ - Data must be sent and received to tape - not available on demand
+
+All storage is shared between YS and CH!
+
+

@@ -1,0 +1,800 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://ncar.github.io/PySpark4Climate/installation/yellowstone/">
+      
+      
+      
+        <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.4">
+    
+    
+      
+        <title>Yellowstone - PySpark for Climate</title>
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr-1df76c4e58.js"></script>
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application-769c285a91.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="https://ncar.github.io/PySpark4Climate/" title="PySpark for Climate" class="md-icon md-icon--home md-header-nav__button">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+                <span class="md-header-nav__parent">
+                  Installation
+                </span>
+              
+            
+            Yellowstone
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/NCAR/PySpark4Climate" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-icon md-icon--home md-nav__button"></i>
+    
+    PySpark for Climate
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/NCAR/PySpark4Climate" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Installation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Installation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Yellowstone
+      </label>
+    
+    <a href="./" title="Yellowstone" class="md-nav__link md-nav__link--active">
+      Yellowstone
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-installation" title="1. Installation" class="md-nav__link">
+    1. Installation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-downloading-spark-and-setting-up-sparks-directory-and-necessary-files" title="1.1 Downloading Spark and Setting up Spark's directory and necessary files" class="md-nav__link">
+    1.1 Downloading Spark and Setting up Spark's directory and necessary files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-scripts" title="1.2 Scripts" class="md-nav__link">
+    1.2 Scripts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cheyenne/" title="Cheyenne" class="md-nav__link">
+      Cheyenne
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Usage
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Usage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../usage/yellowstone/" title="Yellowstone" class="md-nav__link">
+      Yellowstone
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../usage/cheyenne/" title="Cheyenne" class="md-nav__link">
+      Cheyenne
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../pyspark4climate/" title="PySpark4Climate Package" class="md-nav__link">
+      PySpark4Climate Package
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-installation" title="1. Installation" class="md-nav__link">
+    1. Installation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-downloading-spark-and-setting-up-sparks-directory-and-necessary-files" title="1.1 Downloading Spark and Setting up Spark's directory and necessary files" class="md-nav__link">
+    1.1 Downloading Spark and Setting up Spark's directory and necessary files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-scripts" title="1.2 Scripts" class="md-nav__link">
+    1.2 Scripts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/NCAR/PySpark4Climate/edit/master/docs/installation/yellowstone.md" title="Edit this page" class="md-icon md-content__icon">edit</a>
+                
+                
+                <h1 id="apache-spark-211-on-yellowstone">Apache Spark 2.1.1 on Yellowstone</h1>
+<p>The first task of our research project was to install the newest version of Apache Spark on Yellowstone. </p>
+<p>At the time (May/2017), there was an old installation of Apache Spark (Spark 1.6) on Yellowstone. This installation was done by Davide Del Vento.</p>
+<p>As of today (June/2017), we've been able to install the newest version of Apache Spark - <a href="https://spark.apache.org/downloads.html">Spark 2.1.1+Hadoop2.7</a>.</p>
+<p>Below are the steps that we took to get Spark Up and Running on Yellowstone.</p>
+<p>If all you need is to run the existing Apache Spark on Yellowstone, just skip to <strong>Section 2</strong> of this page.</p>
+<h2 id="1-installation">1. Installation</h2>
+<h3 id="11-downloading-spark-and-setting-up-sparks-directory-and-necessary-files">1.1 Downloading Spark and Setting up Spark's directory and necessary files</h3>
+<ol>
+<li>Log into Yellowstone</li>
+<li>Change working directory to <code>/glade/p/work/abanihi</code><ul>
+<li><code>cd /glade/p/work/abanihi/</code></li>
+</ul>
+</li>
+<li>
+<p>Go to <a href="https://spark.apache.org/downloads.html">Apache Spark's official website</a> and follow steps 1-4 to get a download link for Spark. Copy the download link and </p>
+</li>
+<li>
+<p>Go to <code>/glade/p/work/abanihi/</code> and download Spark</p>
+<ul>
+<li><code>wget https://d3kbcqa49mib13.cloudfront.net/spark-2.1.1-bin-hadoop2.7.tgz</code></li>
+<li>Untar <code>spark-2.1.1-bin-hadoop2.7.tgz</code> with <ul>
+<li><code>tar -xzf spark-2.1.1-bin-hadoop2.7.tgz</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Change directory to <code>spark-2.1.1-bin-hadoop2.7/conf</code> and open <code>log4j.properties.template</code></p>
+<ul>
+<li><code>cd spark-2.1.1-bin-hadoop2.7/conf</code></li>
+<li><code>nano log4j.properties.template</code></li>
+<li>Go to the following line: <code>log4j.rootCategory=INFO, console</code> and change <code>INFO</code> to <code>ERROR</code></li>
+<li>Exit out of the editor</li>
+</ul>
+</li>
+<li>
+<p>Rename <code>log4j.properties.template</code> to <code>log4j.properties</code></p>
+<ul>
+<li><code>mv log4j.properties.template log4.properties</code></li>
+</ul>
+</li>
+<li>
+<p>Change working directory to <code>/glade/p/work/abanihi</code></p>
+<ul>
+<li><code>cd /glade/p/work/abanihi/</code></li>
+</ul>
+</li>
+<li>
+<p>Download H5Spark Package: This package supports Hierarchical Data Format, HDF5/netCDF4 and Rich Parallel I/O interface in Spark. For more details, please see this <a href="https://github.com/NCAR/PySpark4Climate/blob/devel/docs/templates/h5spark.md">page</a>.</p>
+<ul>
+<li><code>git clone https://github.com/valiantljk/h5spark.git</code></li>
+<li>This package will be added to <code>Python Path</code> in <code>spark-cluster.sh</code> script.</li>
+</ul>
+</li>
+</ol>
+<h3 id="12-scripts">1.2 Scripts</h3>
+<p><strong>Note:</strong> The scripts in this directory are based on Davide's previous scripts for Spark 1.6.</p>
+<ul>
+<li>
+<p>Change working directory to <code>/glade/p/work/abanihi</code></p>
+<ul>
+<li><code>cd /glade/p/work/abanihi</code></li>
+</ul>
+</li>
+<li>
+<p>Create a new directory called <code>yellowstone</code> and move into it </p>
+<ul>
+<li><code>mkdir yellowstone</code></li>
+<li><code>`cd yellowstone</code></li>
+<li>Create <code>spark-cluster-scripts</code>directory and move into it</li>
+<li><code>mkdir spark-cluster-scripts</code></li>
+<li><code>cd spark-cluster-scripts/</code></li>
+</ul>
+</li>
+<li>
+<p>Create a new script and name it <code>spark-env.sh</code></p>
+<ul>
+<li><code>nano spark-env.sh</code></li>
+<li><code>spark-env.sh</code> should have the following content </li>
+</ul>
+</li>
+</ul>
+<pre><code class="bash">#!/usr/bin/env bash
+
+source /etc/profile.d/modules.sh
+
+module restore system
+module swap intel gnu/5.3.0
+module load java
+module load python all-python-libs
+module load h5py
+
+export SPARK_WORKER_DIR=/glade/scratch/$USER/spark/work
+export SPARK_LOG_DIR=/glade/scratch/$USER/spark/logs
+export SPARK_LOCAL_DIRS=/glade/scratch/$USER/spark/temp
+export SPARK_LOCAL_IP=$(sed -e 's/\([^.]*\).*$/\1-ib/' &lt;&lt;&lt; $(hostname))
+
+</code></pre>
+
+<ul>
+<li>Create a new script file and name it <code>spark-cluster.sh</code><ul>
+<li><code>nano spark-cluster.sh</code></li>
+</ul>
+</li>
+</ul>
+<pre><code class="bash">#!/usr/bin/env bash
+export SPARK_HOME=/glade/p/work/abanihi/spark-2.1.1-bin-hadoop2.7/
+export PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
+export PYTHONPATH=$PYTHONPATH:/glade/p/work/abanihi/pyspark4climate/
+export SPARK_CONF_DIR=~/yellowstone/spark/conf
+export SPARK_HOSTFILE=$SPARK_CONF_DIR/spark_hostfile
+
+# create temp hostfile
+export SPARK_TEMP_HOSTFILE=$SPARK_CONF_DIR/spark_temp_hostfile
+
+rm $SPARK_HOSTFILE $SPARK_CONF_DIR/slaves
+
+
+mpirun.lsf hostname | grep -v Execute | sort &gt;&gt; $SPARK_TEMP_HOSTFILE
+
+sed -i 's/$/-ib/' $SPARK_TEMP_HOSTFILE
+cat $SPARK_TEMP_HOSTFILE | sort -u &gt;&gt; $SPARK_HOSTFILE
+tail -n +2 $SPARK_TEMP_HOSTFILE | sort -u &gt;&gt; $SPARK_CONF_DIR/slaves
+tail -n +2 $SPARK_TEMP_HOSTFILE | uniq -c &gt; $SPARK_CONF_DIR/temp_ncores_slaves
+
+rm $SPARK_TEMP_HOSTFILE
+
+
+export SPARK_MASTER_HOST=$(head -n 1 $SPARK_HOSTFILE)
+export MASTER=spark://$SPARK_MASTER_HOST:7077
+
+cp ~/yellowstone/spark/spark-cluster-scripts/spark-env.sh $SPARK_CONF_DIR/spark-env.sh
+source $SPARK_CONF_DIR/spark-env.sh
+
+if [ &quot;$1&quot; == &quot;start&quot; ]; then
+    cmd_master=&quot;$SPARK_HOME/sbin/start-master.sh&quot;
+    cmd_slave=&quot;$SPARK_HOME/sbin/spark-daemon.sh --config $SPARK_CONF_DIR start org.apac
+he.spark.deploy.worker.Worker 1 $MASTER&quot;
+elif [ &quot;$1&quot; == &quot;stop&quot; ]; then
+    cmd_master=&quot;$SPARK_HOME/sbin/stop-master.sh&quot;
+    cmd_slave=&quot;$SPARK_HOME/sbin/spark-daemon.sh --config $SPARK_CONF_DIR stop org.apach
+e.spark.deploy.worker.Worker 1&quot;
+else
+    exit 1
+fi
+
+$cmd_master
+
+while read ncore_slave
+do
+    ncore=$(echo $ncore_slave | cut -d' ' -f1)
+    slave=$(echo $ncore_slave | cut -d' ' -f2)
+
+    if [ &quot;$slave&quot; == &quot;$SPARK_MASTER_HOST&quot; ]; then
+          echo &quot;On Master node.  Running: cmd_slave --cores $ncore&quot;
+          $cmd_slave --cores $ncore
+     else
+          echo &quot;On Worker node.  Running: cmd_slave --cores $ncore&quot;
+          ssh $slave &quot;$cmd_slave&quot; --cores $ncore &lt;/dev/null &amp;
+    fi
+done &lt;$SPARK_CONF_DIR/temp_ncores_slaves
+
+</code></pre>
+
+<ul>
+<li>Create a new script file and name it <code>start-pyspark.sh</code></li>
+</ul>
+<pre><code class="bash">#!/usr/bin/env bash
+
+source ~/yellowstone/spark/spark-cluster-scripts/spark-cluster.sh start
+
+$SPARK_HOME/bin/pyspark --master $MASTER
+
+</code></pre>
+
+<ul>
+<li>Create a new script file and name it <code>start-sparknotebook</code>. This script file is an extension of <code>/glade/apps/opt/jupyter/5.0.0/gnu/4.8.2/bin/start-notebook</code> script file.</li>
+</ul>
+<pre><code class="bash">#!/usr/bin/env bash
+
+#source spark-cluster.sh start
+source ~/yellowstone/spark/spark-cluster-scripts/spark-cluster.sh start
+
+# Add the PySpark classes to the Python path:
+export PATH=&quot;$SPARK_HOME:$PATH&quot;
+export PATH=$PATH:$SPARK_HOME/bin
+export PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
+export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:$PYTHONPATH
+
+# Create trap to kill notebook when user is done
+kill_server() {
+    if [[ &quot;$JNPID&quot; != -1 ]]; then
+        echo -en &quot;\nKilling Jupyter Notebook Server with PID=$JNPID ... &quot;
+        kill &quot;$JNPID&quot;
+        echo &quot;done&quot;
+        exit 0
+    else
+        exit 1
+    fi
+}
+
+JNPID=-1
+trap kill_server SIGHUP SIGINT SIGTERM
+
+# Begin server creation
+JNHOST=$(hostname)
+LOGDIR=/glade/scratch/${USER}/.jupyter-notebook
+LOGFILE=${LOGDIR}/log.$(date +%Y%m%dT%H%M%S)
+mkdir -p &quot;$LOGDIR&quot;
+
+if [[ $JNHOST == ch* || $JNHOST == r* ]]; then
+    STHOST=cheyenne
+else
+    STHOST=yellowstone
+fi
+
+echo &quot;Logging this session in $LOGFILE&quot;
+
+# Check if running on login nodes
+if [[ $JNHOST == yslogin* ]]; then
+cat &lt;&lt; EOF
+
+See &quot;Use of login nodes&quot; here before running Jupyter Notebook on this
+node: https://www2.cisl.ucar.edu/resources/yellowstone/using_resources.
+
+Consider running on Geyser instead by using execgy to start a session. (Run execgy -hel
+p.)
+EOF
+elif [[ $JNHOST == cheyenne* ]]; then
+cat &lt;&lt; EOF
+
+See &quot;Use of login nodes&quot; here before running Jupyter Notebook on this
+node: https://www2.cisl.ucar.edu/resources/computational-systems/cheyenne/running-jobs.
+
+Consider running in an interactive job instead by using qinteractive. (Run qinterative
+-help.)
+EOF
+fi
+
+
+jupyter notebook &quot;$@&quot; --no-browser --ip=&quot;$JNHOST&quot;&gt; &quot;$LOGFILE&quot; 2&gt;&amp;1 &amp;
+JNPID=$!
+
+
+echo -en  &quot;\nStarting jupyter notebook server, please wait ... &quot;
+
+ELAPSED=0
+ADDRESS=
+
+while [[ $ADDRESS != *&quot;${JNHOST}&quot;* ]]; do
+    sleep 1
+    ELAPSED=$((ELAPSED+1))
+    ADDRESS=$(tail -n 1 &quot;$LOGFILE&quot;)
+
+    if [[ $ELAPSED -gt 30 ]]; then
+        echo -e &quot;something went wrong\n---&quot;
+        cat &quot;$LOGFILE&quot;
+        echo &quot;---&quot;
+
+        kill_server
+    fi
+done
+
+echo -e &quot;done\n---\n&quot;
+
+ADDRESS=${ADDRESS##*:}
+PORT=${ADDRESS%/*}
+TOKEN=${ADDRESS#*=}
+
+cat &lt;&lt; EOF
+Run the following command on your desktop or laptop:
+
+   ssh -N -l $USER -L 8888:${JNHOST}:$PORT ${STHOST}.ucar.edu
+
+Log in with your YubiKey/Cryptocard (there will be no prompt).
+Then open a browser and go to http://localhost:8888. The Jupyter web
+interface will ask you for a token. Use the following:
+
+    $TOKEN
+
+Note that anyone to whom you give the token can access (and modify/delete)
+files in your GLADE spaces, regardless of the file permissions you
+have set. SHARE TOKENS RARELY AND WISELY!
+
+To stop the server, press Ctrl-C.
+EOF
+
+# Wait for user kill command
+sleep inf
+
+</code></pre>
+
+<p><strong>Note:</strong> Make the above scripts executable (<code>chmod +x script_name.sh</code>)</p>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../.." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Home
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../cheyenne/" title="Cheyenne" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Cheyenne
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application-c35428f87f.js"></script>
+      
+      
+      <script>app.initialize({url:{base:"../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>
