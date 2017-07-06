@@ -33,13 +33,118 @@ Examples of these pain points include:
    - calendar harmonizing
 
 
-* [x] Lorem ipsum dolor sit amet, consectetur adipiscing elit
-* [x] Nulla lobortis egestas semper
-* [x] Curabitur elit nibh, euismod et ullamcorper at, iaculis feugiat est
-* [ ] Vestibulum convallis sit amet nisi a tincidunt
-    * [x] In hac habitasse platea dictumst
-    * [x] In scelerisque nibh non dolor mollis congue sed et metus
-    * [x] Sed egestas felis quis elit dapibus, ac aliquet turpis mattis
-    * [ ] Praesent sed risus massa
-* [ ] Aenean pretium efficitur erat, donec pharetra, ligula non scelerisque
-* [ ] Nulla vel eros venenatis, imperdiet enim id, faucibus nisi
+
+## What's Apache Spark?
+
+- Apache Spark is an open source cluster computing framework
+    - It was developed at UCB AMPLab, 2014 v1.0, 2016 v.2
+        - Actively developed, 1086 contributors, 19, 788 commits (As of June 5, 2017)
+
+    - Productive programming interface
+        - 6 vs 28 lines of code compare to hadoop mapreduce
+
+    - Implicit data parallelism
+    - Fault-tolerance
+
+- Spark for Data-intensive Computing
+    - Streaming processing
+    - SQL
+    - Machine Learning, MLlib
+    - Graph Processing
+
+
+## Porting Apache Spark software stack on HPC
+
+- Advantages of Porting Spark onto HPC
+    - A more productive API for data-intensive computing
+    - Relieve the users from:
+        - concurrency control
+        - communication
+        - memory management with traditional MPI model
+    - Embarrassingly parallel computing, ```data.map(func)```
+    - Fault tolerance, ```recompute()```
+
+
+- HPC applications often rely on hierarchical data formats to organize files and datasets. **However, accessing data stored in HDF/netCDF files is not natively supported in Spark.** 
+
+- Reasons of lack of netCDF/HDF support in Spark include:
+    - Lack of an API in Spark to directly load or sub-select HDF/netCDF datasets into its in-memory data structures.
+    - HDF/netCDF have a deep hierarchy, which cannot simply be treated as a sequence of bytes nor be evenly divided.
+    - GPFS file system is not well tuned for SPARK I/O and vice versa.
+
+
+
+## Data in Spark
+
+**Resilient Distributed Datasets(RDDs)** are:
+
+- The primary abstraction in Spark
+    - Immutable(Read-Only) once constructed
+    - Spark tracks lineage information to efficiently recompute lost data
+    - Enable operations on collection of elements in parallel
+    
+- You construct RDDs
+    - by parallelizing existing Python collections (lists)
+    - by transforming an existing RDDs
+    - from files in HDFS or any other storage system (glade in case of Yellowstone and Cheyenne)
+    
+    
+- The programmer needs to specify the number of partitions for an RDD or the default value is used if unspecified.
+
+![Partitioning](https://i.imgur.com/zaOQIQY.jpg)
+
+*Image Courtesy: BerkeleyX-CS100.1x-Big-Data-with-Apache-Spark*
+
+
+There are two types of operations on RDDs: **Transformations** and **Actions**.
+
+
+
+- **Transformations** are lazy in a sense that they are not computed immediately
+- Transformed RDD is executed when action runs on it.
+- RDDs can be persisted(cached) in memory or disk.
+
+**Working with RDDs**:
+
+- Create an RDD from a data source
+- Apply transformations to an RDD: ```.map(...)```
+- Apply actions to an RDD: ```.collect()```, ```.count()```
+
+![](https://i.imgur.com/iqvUJV5.jpg)
+
+
+![](https://i.imgur.com/EuyK62Q.jpg)
+
+*Image Courtesy: BerkeleyX-CS100.1x-Big-Data-with-Apache-Spark*
+
+## Data in HDF/netCDF
+- Hierarchical Data Format v5
+![](https://i.imgur.com/gFC9CAp.jpg)
+
+
+
+
+## Support HDF/netCDF in Spark 2.x Series
+- What does Spark have in reading various data formats?
+    - Textfile: ```sc.textFile()``` or ```spark.read.load("filename.txt", format="txt")```
+    - Parquet: ```spark.read.load("filename.parquet", format="parquet")```
+    - Json: ```spark.read.load("filename.json", format="json")```
+    - csv: ```spark.read.load("filename.csv", format="csv)```
+    - jdbc: ```spark.read.load("filename.jdbc", format="jdbc")```
+    - orc, libsvm follow the same pattern.
+
+- How about HDF5/netCDF4?:
+    - There is no such thing as ```spark.read.load("filename.hdf5", format="hdf5")``` or ```spark.read.load("filename.nc", format="nc")```
+
+
+- Challenges: Functionality and Performance
+    - How to transform an netCDF dataset into an RDD?
+    - How to utilize the netCDF I/O libraries in Spark?
+    - How to enable parallel I/O on HPC?
+    - What is the impact of a parallel filesytem striping like [GPFS](https://en.wikipedia.org/wiki/IBM_General_Parallel_File_System)?
+    - What is the effect of Caching on I/O in Spark?
+
+- Any Solution?
+    - **[PySpark4Climate Package](https://github.com/NCAR/PySpark4Climate)** is a high level library for parsing netCDF data with Apache Spark, for Spark SQL and DataFrames.
+
+

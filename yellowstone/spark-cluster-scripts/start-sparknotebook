@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+
+#source spark-cluster.sh start
+source ~/yellowstone/spark/spark-cluster-scripts/spark-cluster.sh start
+
+# Add the PySpark classes to the Python path:
+export PATH="$SPARK_HOME:$PATH"
+export PATH=$PATH:$SPARK_HOME/bin
+export PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
+export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:$PYTHONPATH
+
+# Create trap to kill notebook when user is done
+kill_server() {
+    if [[ "$JNPID" != -1 ]]; then
+        echo -en "\nKilling Jupyter Notebook Server with PID=$JNPID ... "
+        kill "$JNPID"
+        echo "done"
+        exit 0
+    else
+        exit 1
+    fi
+}
+
+JNPID=-1
+trap kill_server SIGHUP SIGINT SIGTERM
+
+# Begin server creation
+JNHOST=$(hostname)
+LOGDIR=/glade/scratch/${USER}/.jupyter-notebook
+LOGFILE=${LOGDIR}/log.$(date +%Y%m%dT%H%M%S)
+mkdir -p "$LOGDIR"
+
+if [[ $JNHOST == ch* || $JNHOST == r* ]]; then
+    STHOST=cheyenne
+else
+    STHOST=yellowstone
+fi
+
+echo "Logging this session in $LOGFILE"
+
+# Check if running on login nodes
+if [[ $JNHOST == yslogin* ]]; then
+cat << EOF
+
+See "Use of login nodes" here before running Jupyter Notebook on this
+node: https://www2.cisl.ucar.edu/resources/yellowstone/using_resources.
+
+Consider running on Geyser instead by using execgy to start a session. (Run execgy -hel
+p.)
+EOF
+elif [[ $JNHOST == cheyenne* ]]; then
+cat << EOF
+
+See "Use of login nodes" here before running Jupyter Notebook on this
+node: https://www2.cisl.ucar.edu/resources/computational-systems/cheyenne/running-jobs.
+
+Consider running in an interactive job instead by using qinteractive. (Run qinterative
+-help.)
+EOF
+fi
+
+
+jupyter notebook "$@" --no-browser --ip="$JNHOST"> "$LOGFILE" 2>&1 &
+JNPID=$!
+
+
+echo -en  "\nStarting jupyter notebook server, please wait ... "
+
+ELAPSED=0
+ADDRESS=
+
+while [[ $ADDRESS != *"${JNHOST}"* ]]; do
+    sleep 1
+    ELAPSED=$((ELAPSED+1))
+    ADDRESS=$(tail -n 1 "$LOGFILE")
+
+    if [[ $ELAPSED -gt 30 ]]; then
+        echo -e "something went wrong\n---"
+        cat "$LOGFILE"
+        echo "---"
+
+        kill_server
+    fi
+done
+
+echo -e "done\n---\n"
+
+ADDRESS=${ADDRESS##*:}
+PORT=${ADDRESS%/*}
+TOKEN=${ADDRESS#*=}
+
+cat << EOF
+Run the following command on your desktop or laptop:
+
+   ssh -N -l $USER -L 8888:${JNHOST}:$PORT ${STHOST}.ucar.edu
+
+Log in with your YubiKey/Cryptocard (there will be no prompt).
+Then open a browser and go to http://localhost:8888. The Jupyter web
+interface will ask you for a token. Use the following:
+
+    $TOKEN
+
+Note that anyone to whom you give the token can access (and modify/delete)
+files in your GLADE spaces, regardless of the file permissions you
+have set. SHARE TOKENS RARELY AND WISELY!
+
+To stop the server, press Ctrl-C.
+EOF
+
+# Wait for user kill command
+sleep inf
