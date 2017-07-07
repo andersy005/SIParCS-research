@@ -1,0 +1,44 @@
+### Common Directory locations
+export WORK=/glade/p/work/$USER/cheyenne
+export SCRATCH=/glade/scratch/$USER/cheyenne
+
+
+### Account Name
+export PBS_ACCOUNT=STDD0004
+
+### Generic Aliases
+alias h="history | grep "
+alias ls="ls --color"
+alias em="emacs -nw"
+alias diffcolor='git diff --color=always --color-words'
+
+alias cds='cd $SCRATCH'
+alias cdw='cd $WORK'
+
+export LD_LIBRARY_PATH=/glade/u/apps/ch/opt/geos/3.6.1/gnu/6.2.0/lib:$LD_LIBRARY_PATH
+
+### Basic modules
+module swap intel gnu
+module load nano
+module load git
+module load python
+module load jupyter
+module load numpy/1.12.0
+module load matplotlib/2.0.0
+module load pynio
+module load netcdf4-python
+module load numexpr/2.6.2 
+module load bottleneck/1.2.0
+module load pandas/0.20.1  
+module load pytables/3.4.2 
+module load xarray/0.9.5 
+module load cf_units
+module load scipy/0.18.1   
+module load scikit-learn/0.18.1
+
+
+### Other Personal Settings
+INSTALLS=/glade/p/work/abanihi/cy/installs
+export PYTHONPATH=$INSTALLS/lib/python2.7/site-packages/:$PYTHONPATH
+export LD_LIBRARY_PATH=$WORK/installs/lib:$LD_LIBRARY_PATH
+
