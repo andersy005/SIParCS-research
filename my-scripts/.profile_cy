@@ -35,10 +35,20 @@ module load xarray/0.9.5
 module load cf_units
 module load scipy/0.18.1   
 module load scikit-learn/0.18.1
+module load proj
 
 
 ### Other Personal Settings
 INSTALLS=/glade/p/work/abanihi/cy/installs
-export PYTHONPATH=$INSTALLS/lib/python2.7/site-packages/:$PYTHONPATH
+#PYTHON_INSTALLS=/glade/p/work/abanihi/cy/installs/local
+export PYTHONPATH=$INSTALLS/local/keras/2.0.6/lib/python2.7/site-packages/:$PYTHONPATH
+export PYTHONPATH=$INSTALLS/local/shapely/1.6/lib/python2.7/site-packages/:$PYTHONPATH
+export PYTHONPATH=$INSTALLS/local/geopandas/0.2.1/lib/python2.7/site-packages/:$PYTHONPATH
+export PYTHONPATH=$INSTALLS/local/rasterio/1.0a9/lib/python2.7/site-packages/:$PYTHONPATH
+#export PYTHONPATH=$INSTALLS/lib/python2.7/site-packages/:$PYTHONPATH
 export LD_LIBRARY_PATH=$WORK/installs/lib:$LD_LIBRARY_PATH
+
+# Personal Modules
+module use $INSTALLS/local/share/lmodfiles
+module load geopandas
 
