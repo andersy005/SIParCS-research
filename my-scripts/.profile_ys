@@ -1,0 +1,57 @@
+### Common Directory locations
+export WORK=/glade/p/work/$USER/ys
+export SCRATCH=/glade/scratch/$USER/ys
+
+
+### Account Name
+export LBS_ACCOUNT=STDD0004
+
+### Generic Aliases
+alias h="history | grep "
+alias ls="ls --color"
+alias em="emacs -nw"
+alias diffcolor='git diff --color=always --color-words'
+
+alias cds='cd $SCRATCH'
+alias cdw='cd $WORK'
+
+export LD_LIBRARY_PATH=/glade/u/apps/ch/opt/geos/3.6.1/gnu/6.2.0/lib:$LD_LIBRARY_PATH
+
+### Basic modules
+module swap intel gnu/5.0.1 
+module load git
+
+module load python
+module load numpy/1.11.0
+module load scipy/0.17.1
+module load numexpr/2.6.0
+module load scikit-learn/0.17.1
+module load bottleneck/1.1.0
+module load pandas/0.18.1
+module load biggus
+module load pyzmq/16.0.2
+module load tornado/4.4.3
+module load jupyter
+module load Pillow
+
+module load java
+module load cuda
+
+
+
+
+
+### Other Personal Settings
+INSTALLS=/glade/p/work/abanihi/ys/installs
+#PYTHON_INSTALLS=/glade/p/work/abanihi/cy/installs/local
+#export PYTHONPATH=$INSTALLS/local/te/2.0.6/lib/python2.7/site-packages/:$PYTHONPATH
+#export PYTHONPATH=$INSTALLS/local/shapely/1.6/lib/python2.7/site-packages/:$PYTHONPATH
+#export PYTHONPATH=$INSTALLS/local/geopandas/0.2.1/lib/python2.7/site-packages/:$PYTHONPATH
+#export PYTHONPATH=$INSTALLS/local/rasterio/1.0a9/lib/python2.7/site-packages/:$PYTHONPATH
+#export PYTHONPATH=$INSTALLS/lib/python2.7/site-packages/:$PYTHONPATH
+export PYTHONPATH=/glade/p/work/abanihi/ys/installs/local/tensorflow-gpu/1.2.1/lib/python2.7/site-packages:$PYTHONPATH
+export LD_LIBRARY_PATH=$WORK/installs/lib:$LD_LIBRARY_PATH
+
+# Personal Modules
+
+
