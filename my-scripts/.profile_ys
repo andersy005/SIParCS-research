@@ -1,6 +1,6 @@
 ### Common Directory locations
-export WORK=/glade/p/work/$USER/ys
-export SCRATCH=/glade/scratch/$USER/ys
+export WORK=/glade/p/work/$USER/yel
+export SCRATCH=/glade/scratch/$USER/yel
 
 
 ### Account Name
@@ -15,10 +15,13 @@ alias diffcolor='git diff --color=always --color-words'
 alias cds='cd $SCRATCH'
 alias cdw='cd $WORK'
 
-export LD_LIBRARY_PATH=/glade/u/apps/ch/opt/geos/3.6.1/gnu/6.2.0/lib:$LD_LIBRARY_PATH
 
+export LD_LIBRARY_PATH=/glade/u/apps/ch/opt/geos/3.6.1/gnu/6.2.0/lib:$LD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/4.4.7/include
+export LD_LIBRARY_PATH=/ncar/opt/cuda/8.0.44/lib64:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/glade/u/apps/opt/gnu/4.8.2/include/c++/4.8.2:$LD_LIBRARY_PATH
 ### Basic modules
-module swap intel gnu/5.0.1 
+module swap intel gnu
 module load git
 
 module load python
@@ -35,11 +38,13 @@ module load jupyter
 module load Pillow
 
 module load java
+module use /glade/u/apps/contrib/modulefiles/
 module load cuda
+module load cuDNN
 
 
-
-
+export GCC='/glade/apps/opt/modulefiles/ys/cmpwrappers/gcc'
+sed -i -e "s=/usr/bin/gcc=$GCC=g" /glade/p/work/abanihi/ys/installs/local/src/temp/bazel/tools/cpp/CROSSTOOL
 
 ### Other Personal Settings
 INSTALLS=/glade/p/work/abanihi/ys/installs
@@ -53,5 +58,6 @@ export PYTHONPATH=/glade/p/work/abanihi/ys/installs/local/tensorflow-gpu/1.2.1/l
 export LD_LIBRARY_PATH=$WORK/installs/lib:$LD_LIBRARY_PATH
 
 # Personal Modules
-
-
+# module use /glade/p/work/abanihi/ys/installs/local/share/lmodfiles/
+module use /glade/p/work/abanihi/ys/modulefiles/
+module load spark

@@ -45,10 +45,16 @@ export PYTHONPATH=$INSTALLS/local/keras/2.0.6/lib/python2.7/site-packages/:$PYTH
 export PYTHONPATH=$INSTALLS/local/shapely/1.6/lib/python2.7/site-packages/:$PYTHONPATH
 export PYTHONPATH=$INSTALLS/local/geopandas/0.2.1/lib/python2.7/site-packages/:$PYTHONPATH
 export PYTHONPATH=$INSTALLS/local/rasterio/1.0a9/lib/python2.7/site-packages/:$PYTHONPATH
+export PYTHONPATH=$INSTALLS/local/pyspark4climate/0.1.0/lib/python2.7/site-packages/:$PYTHONPATH
+export PYTHONPATH=$INSTALLS/local/seaborn/0.8.0/lib/python2.7/site-packages/:$PYTHONPATH
+#export PYTHONPATH=$INSTALLS/local/tensorflow/1.2.1/lib/python2.7/site-packages/:$PYTHONPATH
 #export PYTHONPATH=$INSTALLS/lib/python2.7/site-packages/:$PYTHONPATH
 export LD_LIBRARY_PATH=$WORK/installs/lib:$LD_LIBRARY_PATH
 
 # Personal Modules
-module use $INSTALLS/local/share/lmodfiles
-module load geopandas
-
+#module use $INSTALLS/local/share/lmodfiles
+#module load geopandas
+#module load pyspark4climate
+#module load seaborn
+module use /glade/p/work/abanihi/cy/modulefiles/
+module load spark
